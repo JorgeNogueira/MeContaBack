@@ -1,0 +1,5 @@
+instale o flask
+
+pip install Flask
+Para rodar o aplicativo
+FLASK_APP=server.py flask run
