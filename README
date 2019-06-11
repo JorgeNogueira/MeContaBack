@@ -3,3 +3,8 @@ instale o flask
 pip install Flask
 Para rodar o aplicativo
 FLASK_APP=server.py flask run
+
+instale o driver do mysql no python utilizando conda
+
+conda install --channel https://conda.anaconda.org/CEFCA mysql-python
+
