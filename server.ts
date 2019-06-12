@@ -31,7 +31,7 @@ server.setConfig((express) => {
 const app = server.build();
 
 
-const PORT = 8080;
+const PORT = 8081;
 
 // create the http server
 const httpServer = http.createServer(app);
