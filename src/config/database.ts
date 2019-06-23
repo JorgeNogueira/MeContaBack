@@ -1,10 +1,22 @@
-import {createConnection, Connection} from "typeorm";
+import { createConnection,
+ConnectionOptions } from "typeorm";
+import { User} from "../entity/index";
+import { LoggerOptions } from 'typeorm/logger/LoggerOptions';
 
-const connection = await createConnection({
-    host: 'sql157.main-hosting.eu',
+const connectionOptions: ConnectionOptions = {
+    host: 'localhost',
     type: "mysql",
     port: 3306,
-    username: 'u159087763_mecon',
-    password: 'zVMjhZWw5FeV',
+    username: 'root',
+    password: 'zinukted$0',
     database: 'meConta',
-});
+    name: "default",
+    synchronize: true,
+    dropSchema: true,
+    logging: "all",
+    entities: [
+        User,
+    ]
+}
+
+export const dbConnFactory = () => createConnection(connectionOptions);

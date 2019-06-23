@@ -1,6 +1,6 @@
 import { Container } from "inversify";
 // import { EmpresaService } from './services/empresa.service';
-import {FooController} from "./controller"
+import {FooController} from "../controller/controller"
 
 export const container = new Container();
 

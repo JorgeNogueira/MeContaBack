@@ -1,18 +1,31 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ValueTransformer, getManager} from "typeorm";
 
-@Entity()
-export class User {
+const transformer: ValueTransformer[] = [
+    {
+        from(value: any)  {
+            return value;
+        },
+        to(value: any) {
+            return value;
+            return 'Junior' + value;
+        }
+    }
+]
+export interface IUser {
+    name?: string;
+    id: string;
+}
+@Entity({name: "TB_USR"})
+export class User  implements IUser {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id: string = "";
 
-    @Column()
-    firstName: string;
-
-    @Column()
-    lastName: string;
-
-    @Column()
-    age: number;
-
+    @Column({
+        name: "NM_CLI",
+        transformer: transformer,
+    })
+    name?: string;
 }
+
+export const UserRepository =  () => getManager("default").getRepository(User);

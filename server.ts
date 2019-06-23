@@ -8,10 +8,9 @@ import * as http from "http";
 import { getRouteInfo } from "inversify-express-utils";
 import * as prettyjson from "prettyjson";
 
-import { container } from "./src/container";
+import { container } from "./src/container/container";
+import { dbConnFactory } from './src/config/database';
 
-// declare metadata by @controller annotation
-// import "./controllers/foo_controller";
 
 // create server
 const server = new InversifyExpressServer(container, null, {
@@ -31,15 +30,13 @@ server.setConfig((express) => {
 const app = server.build();
 
 
-const PORT = 8081;
+const PORT = 8080;
 
 // create the http server
-const httpServer = http.createServer(app);
-
-httpServer.listen(PORT);
-
-const routeInfo = getRouteInfo(container);
-
-
-console.log(`apl-back-vpo running in port ${PORT}`);
-console.log(prettyjson.render({ routes: routeInfo }));
+dbConnFactory().then(() => {
+  const httpServer = http.createServer(app);
+  httpServer.listen(PORT);
+  const routeInfo = getRouteInfo(container);
+  console.log(`MeConta !!!  ${PORT}`);
+  console.log(prettyjson.render({ routes: routeInfo }));
+});
